@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'addHabitDialog.dart';
+import 'habitCard.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,6 +11,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int add = 0;
+
+  List habits = ["Workout", "Sleep 8 Hours", 'Read a Book'];
+
+  void addHabit(add) {
+    setState(() {
+      add = this.add;
+      print(add);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,47 +43,72 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-              height: 80,
-              width: 360,
-              child: ElevatedButton.icon(
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                label: Text(''),
-                onPressed: () {
-                  print('');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0),
+                margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                height: 80,
+                width: 360,
+                child: Expanded(
+                  child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
+                    label: Text(''),
+                    onPressed: () {
+                      print('');
+                      int addButton = this.add += 1;
+                      showDialog(
+                          context: context,
+                          builder: (builder) {
+                            return AddHabitDialog();
+                          });
+                      addHabit(addButton);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
+                )),
             Container(
                 child: Expanded(
               child: ListView.builder(
-                itemCount: 20,
-                itemBuilder: (context, position) {
-                  return Container(
-                    margin: const EdgeInsets.only(left: 5, right: 5),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(
-                          position.toString(),
-                          style: TextStyle(fontSize: 22.0),
-                        ),
-                      ),
-                    ),
+                itemCount: habits.length,
+                itemBuilder: (context, index) {
+                  return HabitCard(
+                    habitName: habits[index],
                   );
                 },
               ),
             )),
+            /*Container(
+                margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                height: 80,
+                width: 360,
+                child: Expanded(
+                  child: ElevatedButton.icon(
+                    icon: Icon(
+                      Icons.remove,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
+                    label: Text(''),
+                    onPressed: () {
+                      print('');
+                      int addButton = this.add -= 1;
+
+                      addHabit(addButton);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                )),*/
           ],
         ),
       ),
