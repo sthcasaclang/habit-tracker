@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'addHabitDialog.dart';
+import 'addHabitController.dart';
+
+import 'addHabitType.dart';
 import 'habitCard.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,14 +13,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int add = 0;
+  final List habits = ["Workout", "Sleep 8 Hours", 'Read a Book'];
 
-  List habits = ["Workout", "Sleep 8 Hours", 'Read a Book'];
+  final _addNewHabitController = TextEditingController();
 
-  void addHabit(add) {
+  saveNewHabit() {
     setState(() {
-      add = this.add;
-      print(add);
+      habits.add([_addNewHabitController.text, false]);
     });
   }
 
@@ -53,16 +54,22 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                       size: 30.0,
                     ),
-                    label: Text(''),
+                    label: const Text(''),
                     onPressed: () {
                       print('');
-                      int addButton = this.add += 1;
-                      showDialog(
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AddHabitType()),
+                      );
+
+                      /*showDialog(
                           context: context,
                           builder: (builder) {
                             return AddHabitDialog();
                           });
-                      addHabit(addButton);
+                      addHabit(addButton);*/
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 0, 0, 0),
