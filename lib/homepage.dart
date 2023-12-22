@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'habitsList.dart';
 import 'addHabitType.dart';
 import 'habitCard.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final List habits = ["Workout", "Sleep 8 Hours", 'Read a Book'];
-
-  final _addNewHabitController = TextEditingController();
-
-  saveNewHabit() {
-    setState(() {
-      habits.add([_addNewHabitController.text, false]);
-    });
-  }
+  final List<String> habits = habitsData;
 
   @override
   Widget build(BuildContext context) {
@@ -43,41 +35,38 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Container(
-                margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                height: 80,
-                width: 360,
-                child: Expanded(
-                  child: ElevatedButton.icon(
-                    icon: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 30.0,
-                    ),
-                    label: const Text(''),
-                    onPressed: () {
-                      print('');
+              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              height: 80,
+              width: 360,
+              child: ElevatedButton.icon(
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                label: const Text(''),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddHabitType()),
+                  );
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AddHabitType()),
-                      );
-
-                      /*showDialog(
+                  /*showDialog(
                           context: context,
                           builder: (builder) {
                             return AddHabitDialog();
                           });
                       addHabit(addButton);*/
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 0, 0, 0),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(10.0),
-                      ),
-                    ),
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                  shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(10.0),
                   ),
-                )),
+                ),
+              ),
+            ),
             Container(
                 child: Expanded(
               child: ListView.builder(

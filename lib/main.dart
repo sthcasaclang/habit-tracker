@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         elevation: 0,
       ),
       endDrawer: SideNavigationBar(),
-      body: const HomePage(),
+      body: HomePage(),
     ));
   }
 }

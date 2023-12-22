@@ -50,7 +50,7 @@ class AddHabitType extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const addHabitQualitative()),
+                        builder: (context) => addHabitQualitative()),
                   );
                 },
                 child: Text('Yes or No',

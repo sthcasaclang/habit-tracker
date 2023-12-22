@@ -1,9 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_tracker/habitsList.dart';
 import 'main.dart';
+import 'homepage.dart';
+import 'habitsList.dart';
 
-class addHabitQualitative extends StatelessWidget {
-  const addHabitQualitative({super.key});
+class addHabitQualitative extends StatefulWidget {
+  addHabitQualitative({super.key});
+
+  @override
+  State<addHabitQualitative> createState() => _addHabitQualitativeState();
+}
+
+class _addHabitQualitativeState extends State<addHabitQualitative> {
+  final List<String> habits = habitsData;
+
+  final _newHabitName = TextEditingController();
+
+  void saveNewHabit() {
+    setState(() {
+      habits.add((_newHabitName.text));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +50,14 @@ class addHabitQualitative extends StatelessWidget {
               color: Colors.black,
             ),
             onPressed: () {
+              saveNewHabit();
+              /*Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MyApp()));*/
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MyApp()));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyApp(),
+                  ));
             },
           )
         ],
@@ -44,6 +68,7 @@ class addHabitQualitative extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
             child: TextFormField(
+              controller: _newHabitName,
               decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
                 labelText: 'Habit Name',

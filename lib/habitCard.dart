@@ -33,47 +33,45 @@ class HabitCard extends StatelessWidget {
         ]),
         child: Padding(
           padding: EdgeInsets.all(5),
-          child: Expanded(
-            child: ElevatedButton(
-              onPressed: () {
-                print("");
-              },
-              child: Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(35),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(habitName,
-                          textAlign: TextAlign.left,
-                          style: GoogleFonts.ubuntu(
-                            textStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 20,
-                            ),
-                          )),
+          child: ElevatedButton(
+            onPressed: () {
+              print("");
+            },
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(35),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(habitName,
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.ubuntu(
+                          textStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 20,
+                          ),
+                        )),
+                  ),
+                ),
+                Spacer(),
+                SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Icon(
+                      Icons.add,
+                      color: Colors.black,
                     ),
                   ),
-                  Spacer(),
-                  SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.black,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(10.0),
-                ),
+                )
+              ],
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color.fromARGB(255, 255, 255, 255),
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(10.0),
               ),
             ),
           ),
