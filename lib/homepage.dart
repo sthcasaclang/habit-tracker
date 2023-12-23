@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'habitsList.dart';
 import 'addHabitType.dart';
 import 'habitCard.dart';
+import 'addHabitType.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -12,10 +13,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> habits = habitsData;
+  final List<Habits> habitData = Habits.habitsData;
 
   @override
   Widget build(BuildContext context) {
+    print("homepage habitData: $habitData");
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
@@ -70,12 +72,15 @@ class _HomePageState extends State<HomePage> {
             Container(
                 child: Expanded(
               child: ListView.builder(
-                itemCount: habits.length,
+                itemCount: habitData.length,
                 itemBuilder: (context, index) {
                   return HabitCard(
-                    habitName: habits[index],
+                      habitName: Habits.habitsData[index].habitName);
+                }, /*{
+                  return HabitCard(
+                    habitName: habitData[index].habitName,
                   );
-                },
+                },*/
               ),
             )),
             /*Container(

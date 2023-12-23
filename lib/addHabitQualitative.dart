@@ -13,13 +13,13 @@ class addHabitQualitative extends StatefulWidget {
 }
 
 class _addHabitQualitativeState extends State<addHabitQualitative> {
-  final List<String> habits = habitsData;
+  final List<Habits> habitData = Habits.habitsData;
 
   final _newHabitName = TextEditingController();
 
   void saveNewHabit() {
     setState(() {
-      habits.add((_newHabitName.text));
+      habitData.add(Habits(habitName: _newHabitName.text));
     });
   }
 
