@@ -19,7 +19,7 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
 
   void saveNewHabit() {
     setState(() {
-      habitData.add(Habits(habitName: _newHabitName.text));
+      habitData.add(Habits(habitType: 1, habitName: _newHabitName.text));
     });
   }
 
@@ -32,7 +32,7 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
         ),
         centerTitle: true,
         title: Text(
-          'Add Habit',
+          'Create New Habit',
           style: GoogleFonts.ubuntu(
             textStyle: TextStyle(
               color: Colors.black,

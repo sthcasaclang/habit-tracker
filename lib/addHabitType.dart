@@ -12,7 +12,7 @@ class AddHabitType extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Add Habit',
+          'Create New Habit',
           style: GoogleFonts.ubuntu(
             textStyle: TextStyle(
               color: Colors.black,
@@ -82,7 +82,7 @@ class AddHabitType extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const addHabitQuantitative()),
+                        builder: (context) => addHabitQuantitative()),
                   );
                 },
                 child: Text('Measurable',

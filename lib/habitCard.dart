@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:habit_tracker/habitScreen.dart';
 import 'addHabitType.dart';
 import 'habitsList.dart';
 import 'main.dart';
@@ -25,7 +26,7 @@ class _HabitCardState extends State<HabitCard> {
     });
 
     // Add your desired delay duration, for example, 2 seconds
-    await Future.delayed(Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     Navigator.pushReplacement(
       context,
@@ -63,7 +64,7 @@ class _HabitCardState extends State<HabitCard> {
             //label: 'Skip',
           ),
         ]),
-        startActionPane: ActionPane(motion: const ScrollMotion(), children: [
+        /*startActionPane: ActionPane(motion: const ScrollMotion(), children: [
           SlidableAction(
             borderRadius: BorderRadius.circular(15),
             onPressed: (context) {
@@ -79,12 +80,17 @@ class _HabitCardState extends State<HabitCard> {
 
             //label: 'Skip',
           ),
-        ]),
+        ]),*/
         child: Padding(
           padding: EdgeInsets.all(5),
           child: ElevatedButton(
             onPressed: () {
-              print("");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        HabitScreen(habitName: widget.habitName)),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 255, 255, 255),

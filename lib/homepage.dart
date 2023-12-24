@@ -18,6 +18,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     print("homepage habitData: $habitData");
+
+    for (var habit in Habits.habitsData) {
+      print('habitType: ${habit.habitType}, habitName: ${habit.habitName}');
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
