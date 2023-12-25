@@ -12,13 +12,12 @@ class AddHabitType extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Create New Habit',
-          style: GoogleFonts.ubuntu(
+          "Create New Habit",
+          style: GoogleFonts.poppins(
             textStyle: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 20,
-            ),
+                color: Colors.black,
+                fontWeight: FontWeight.normal,
+                fontSize: 20),
           ),
         ),
         backgroundColor: Colors.white,
@@ -40,6 +39,16 @@ class AddHabitType extends StatelessWidget {
       body: Column(
         children: [
           Container(
+            margin: EdgeInsets.only(left: 0, right: 0),
+            alignment: Alignment.center,
+            child: Text("How would you like to evaluate your progress?",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18)),
+          ),
+          Container(
             alignment: Alignment.center,
             child: Container(
               margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
@@ -55,11 +64,11 @@ class AddHabitType extends StatelessWidget {
                 },
                 child: Text('Yes or No',
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.ubuntu(
+                    style: GoogleFonts.poppins(
                       textStyle: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.normal,
-                        fontSize: 20,
+                        fontSize: 15,
                       ),
                     )),
                 style: ElevatedButton.styleFrom(
@@ -70,6 +79,17 @@ class AddHabitType extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20, right: 20),
+            alignment: Alignment.center,
+            child: Text(
+                "e.g. Did you practice programming? Did you read a book?",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 12)),
           ),
           Container(
             alignment: Alignment.center,
@@ -85,13 +105,13 @@ class AddHabitType extends StatelessWidget {
                         builder: (context) => addHabitQuantitative()),
                   );
                 },
-                child: Text('Measurable',
+                child: Text('Numerical Value',
                     textAlign: TextAlign.left,
-                    style: GoogleFonts.ubuntu(
+                    style: GoogleFonts.poppins(
                       textStyle: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.normal,
-                        fontSize: 20,
+                        fontSize: 15,
                       ),
                     )),
                 style: ElevatedButton.styleFrom(
@@ -102,6 +122,17 @@ class AddHabitType extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20, right: 20),
+            alignment: Alignment.center,
+            child: Text(
+                "e.g. How many times did you read today? How many hours did you sleep?",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                    fontSize: 12)),
           ),
         ],
       ),

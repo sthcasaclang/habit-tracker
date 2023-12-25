@@ -20,27 +20,29 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     setState(() {});
-    return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black, size: 35),
-        centerTitle: true,
-        title: Text(
-          'Habit Tracker',
-          style: GoogleFonts.ubuntu(
-            textStyle: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 20,
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: MaterialApp(
+            home: Scaffold(
+          appBar: AppBar(
+            iconTheme: const IconThemeData(color: Colors.black, size: 35),
+            centerTitle: true,
+            title: Text(
+              'Habit Tracker',
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 20,
+                ),
+              ),
             ),
+            backgroundColor: Colors.white,
+            elevation: 0,
           ),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      endDrawer: SideNavigationBar(),
-      body: HomePage(),
-    ));
+          endDrawer: SideNavigationBar(),
+          body: HomePage(),
+        )));
   }
 }
 /*
@@ -74,3 +76,4 @@ class MyApp extends StatelessWidget {
   }
 }
 */
+

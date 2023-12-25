@@ -101,18 +101,19 @@ class _HabitCardState extends State<HabitCard> {
             child: Row(
               children: [
                 Container(
-                  padding: EdgeInsets.all(35),
+                  padding: EdgeInsets.all(30),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(widget.habitName,
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.ubuntu(
-                          textStyle: TextStyle(
+                    child: Text(
+                      widget.habitName,
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 20,
-                          ),
-                        )),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15),
+                      ),
+                    ),
                   ),
                 ),
                 Spacer(),

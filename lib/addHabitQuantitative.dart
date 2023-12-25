@@ -33,7 +33,7 @@ class _addHabitQuantitative extends State<addHabitQuantitative> {
         centerTitle: true,
         title: Text(
           'Create New Habit',
-          style: GoogleFonts.ubuntu(
+          style: GoogleFonts.poppins(
             textStyle: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.normal,
@@ -66,12 +66,22 @@ class _addHabitQuantitative extends State<addHabitQuantitative> {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+            margin: EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 5),
             child: TextFormField(
               controller: _newHabitName,
+              cursorColor: Colors.grey,
               decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 3),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey, width: 2),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0))),
                 labelText: 'Habit Name',
+                labelStyle: TextStyle(
+                  color: Colors.black,
+                  letterSpacing: 1.3,
+                ),
               ),
             ),
           ),
