@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Container(
                   alignment: Alignment.topLeft,
-                  margin: const EdgeInsets.only(left: 20, right: 20, bottom: 0),
+                  margin: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
                   child: Text(
                     'Hello, User',
                     style: GoogleFonts.poppins(

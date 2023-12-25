@@ -39,7 +39,7 @@ class AddHabitType extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(left: 0, right: 0),
+            margin: EdgeInsets.only(left: 0, right: 0, top: 5, bottom: 5),
             alignment: Alignment.center,
             child: Text("How would you like to evaluate your progress?",
                 textAlign: TextAlign.center,
@@ -51,7 +51,7 @@ class AddHabitType extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: Container(
-              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              margin: const EdgeInsets.all(10),
               height: 80,
               width: 360,
               child: ElevatedButton(
@@ -94,7 +94,7 @@ class AddHabitType extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: Container(
-              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+              margin: const EdgeInsets.all(10),
               height: 80,
               width: 360,
               child: ElevatedButton(
