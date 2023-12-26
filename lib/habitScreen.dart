@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 //import 'habitsList.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +8,7 @@ import 'main.dart';
 import 'database/habit_database.dart';
 
 class HabitScreen extends StatefulWidget {
-  String habitName;
+  String? habitName;
 
   HabitScreen({super.key, required this.habitName});
 
@@ -20,12 +21,31 @@ class _HabitScreenState extends State<HabitScreen> {
 
   final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
+  var habitDatabaseBox;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get reference to an already opened box
+    habitDatabaseBox = Hive.box('habit_database');
+  }
+
   deleteHabit() {
     habitsData.removeWhere((element) {
       return element.habitName == widget.habitName;
     });
 
     Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MyApp()),
+    );
+  }
+
+  void deleteHabitInBox(int index) async {
+    await habitDatabaseBox.deleteAt(index);
+
+    // After deleting, you might want to update your UI or navigate to a new screen
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const MyApp()),
     );
@@ -64,7 +84,7 @@ class _HabitScreenState extends State<HabitScreen> {
                                     padding: EdgeInsets.only(left: 20),
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      widget.habitName,
+                                      widget.habitName ?? "Default Value",
                                       style: GoogleFonts.poppins(
                                         textStyle: TextStyle(
                                             color: Colors.black,
@@ -281,7 +301,7 @@ class _HabitScreenState extends State<HabitScreen> {
                 ),
                 centerTitle: true,
                 title: Text(
-                  widget.habitName,
+                  widget.habitName ?? "Default Value",
                   style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                       color: Colors.black,

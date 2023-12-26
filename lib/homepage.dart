@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
 //import 'habitsList.dart';
 import 'addHabitType.dart';
 import 'habitCard.dart';
@@ -16,14 +17,29 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //final List<Habits> habitData = Habits.habitsData;
 
+  var habitDatabaseBox;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get reference to an already opened box
+    habitDatabaseBox = Hive.box('habit_database');
+  }
+
   final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
   @override
   Widget build(BuildContext context) {
-    print("homepage habitData: $habitsData");
+    print("homepage habitData: ${habitDatabaseBox.values.toList()}");
 
     for (var habit in HabitDatabase.habitsData) {
       print('habitType: ${habit.habitType}, habitName: ${habit.habitName}');
+    }
+
+    print("Homepage - habitData: ${habitDatabaseBox.values.toList()}");
+
+    for (var habit in habitDatabaseBox.values) {
+      print('Habit Name: ${habit.habitName}');
     }
     return Scaffold(
         backgroundColor: Colors.white,
@@ -85,11 +101,18 @@ class _HomePageState extends State<HomePage> {
                 Container(
                     child: Expanded(
                   child: ListView.builder(
-                    itemCount: habitsData.length,
+                    itemCount: habitDatabaseBox.length,
                     itemBuilder: (context, index) {
+                      var habit =
+                          habitDatabaseBox.getAt(index) as HabitDatabase;
+                      return HabitCard(habitName: habit.habitName);
+                    },
+                    /*itemCount: habitDatabaseBox.length,
+                    itemBuilder: (context, index) {
+                      habitDatabaseBox.getAt(index) as HabitDatabase;
                       return HabitCard(
                           habitName: HabitDatabase.habitsData[index].habitName);
-                    }, /*{
+                    }, {
                   return HabitCard(
                     habitName: habitData[index].habitName,
                   );

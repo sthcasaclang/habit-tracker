@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_tracker/habitsList.dart';
+import 'package:hive/hive.dart';
 import 'main.dart';
 import 'homepage.dart';
 //import 'habitsList.dart';
@@ -19,11 +20,36 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
 
   final _newHabitName = TextEditingController();
 
-  void saveNewHabit() {
+  /*void saveNewHabit() {
     setState(() {
       habitsData
           .add(HabitDatabase(habitType: 1, habitName: _newHabitName.text));
     });
+  }*/
+
+  var habitDatabaseBox;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get reference to an already opened box
+    habitDatabaseBox = Hive.box('habit_database');
+  }
+
+  void saveNewHabitInBox() async {
+    HabitDatabase newHabit = HabitDatabase(
+      habitName: _newHabitName.text,
+      habitType: 1,
+    );
+    habitDatabaseBox.add(newHabit);
+    print('Info added to box! $_newHabitName');
+  }
+
+  String? _fieldValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field can\'t be empty';
+    }
+    return null;
   }
 
   @override
@@ -53,13 +79,14 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
               color: Colors.black,
             ),
             onPressed: () {
-              saveNewHabit();
+              saveNewHabitInBox();
+              //saveNewHabit();
               /*Navigator.push(
                   context, MaterialPageRoute(builder: (context) => MyApp()));*/
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MyApp(),
+                    builder: (context) => const MyApp(),
                   ));
             },
           )

@@ -14,6 +14,8 @@ void main() async {
 
   Hive.registerAdapter(HabitDatabaseAdapter());
 
+  await Hive.openBox('habit_database');
+
   runApp(const MyApp());
 }
 

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:habit_tracker/habitScreen.dart';
+import 'package:hive/hive.dart';
 import 'addHabitType.dart';
 //import 'habitsList.dart';
 import 'main.dart';
 import 'database/habit_database.dart';
 
 class HabitCard extends StatefulWidget {
-  final String habitName;
+  final String? habitName;
 
   const HabitCard({super.key, required this.habitName});
 
@@ -44,8 +45,7 @@ class _HabitCardState extends State<HabitCard> {
 
   @override
   Widget build(BuildContext context) {
-    print("Building HabitCard for habitName: ${widget.habitName}");
-    setState(() {});
+    print('HabitCard - habitName: ${widget.habitName}');
     return Padding(
       padding: const EdgeInsets.only(left: 6, right: 6, bottom: 1),
       child: Slidable(
@@ -109,7 +109,7 @@ class _HabitCardState extends State<HabitCard> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      widget.habitName,
+                      widget.habitName ?? "Default Value",
                       textAlign: TextAlign.left,
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(

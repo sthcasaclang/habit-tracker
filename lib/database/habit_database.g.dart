@@ -16,7 +16,7 @@ class HabitDatabaseAdapter extends TypeAdapter<HabitDatabase> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return HabitDatabase(habitName: '', habitType: 0);
+    return HabitDatabase();
   }
 
   @override
