@@ -3,7 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_tracker/habitsList.dart';
 import 'main.dart';
 import 'homepage.dart';
-import 'habitsList.dart';
+//import 'habitsList.dart';
+import 'database/habit_database.dart';
 
 class addHabitQualitative extends StatefulWidget {
   addHabitQualitative({super.key});
@@ -13,13 +14,15 @@ class addHabitQualitative extends StatefulWidget {
 }
 
 class _addHabitQualitativeState extends State<addHabitQualitative> {
-  final List<Habits> habitData = Habits.habitsData;
+  //final List<Habits> habitData = Habits.habitsData;
+  final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
   final _newHabitName = TextEditingController();
 
   void saveNewHabit() {
     setState(() {
-      habitData.add(Habits(habitType: 1, habitName: _newHabitName.text));
+      habitsData
+          .add(HabitDatabase(habitType: 1, habitName: _newHabitName.text));
     });
   }
 

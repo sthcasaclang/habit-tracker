@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'habitsList.dart';
+//import 'habitsList.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'main.dart';
+import 'database/habit_database.dart';
 
 class HabitScreen extends StatefulWidget {
   String habitName;
@@ -15,10 +16,12 @@ class HabitScreen extends StatefulWidget {
 }
 
 class _HabitScreenState extends State<HabitScreen> {
-  final List<Habits> habitData = Habits.habitsData;
+  //final List<Habits> habitData = Habits.habitsData;
+
+  final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
   deleteHabit() {
-    habitData.removeWhere((element) {
+    habitsData.removeWhere((element) {
       return element.habitName == widget.habitName;
     });
 

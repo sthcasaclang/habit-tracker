@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:habit_tracker/database/habit_database.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'homepage.dart';
 import 'sidebar.dart';
-import 'habitsList.dart';
+//import 'habitsList.dart';
 
-void main() {
-  print("MyApp Habits List: ${Habits.habitsData}");
+void main() async {
+  //print("MyApp Habits List: ${Habits.habitsData}");
+
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(HabitDatabaseAdapter());
+
   runApp(const MyApp());
 }
 
@@ -17,6 +25,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     setState(() {});

@@ -3,8 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:habit_tracker/habitScreen.dart';
 import 'addHabitType.dart';
-import 'habitsList.dart';
+//import 'habitsList.dart';
 import 'main.dart';
+import 'database/habit_database.dart';
 
 class HabitCard extends StatefulWidget {
   final String habitName;
@@ -16,12 +17,15 @@ class HabitCard extends StatefulWidget {
 }
 
 class _HabitCardState extends State<HabitCard> {
-  final List<Habits> habitData = Habits.habitsData;
+  //final List<Habits> habitData = Habits.habitsData;
+
+  final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
+
   bool isButtonToggled = false;
 
   deleteHabit() async {
     print('removed!');
-    habitData.removeWhere((element) {
+    habitsData.removeWhere((element) {
       return element.habitName == widget.habitName;
     });
 

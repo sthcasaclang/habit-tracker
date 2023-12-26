@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'habitsList.dart';
+//import 'habitsList.dart';
 import 'addHabitType.dart';
 import 'habitCard.dart';
 import 'addHabitType.dart';
+import 'database/habit_database.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -13,13 +14,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Habits> habitData = Habits.habitsData;
+  //final List<Habits> habitData = Habits.habitsData;
+
+  final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
   @override
   Widget build(BuildContext context) {
-    print("homepage habitData: $habitData");
+    print("homepage habitData: $habitsData");
 
-    for (var habit in Habits.habitsData) {
+    for (var habit in HabitDatabase.habitsData) {
       print('habitType: ${habit.habitType}, habitName: ${habit.habitName}');
     }
     return Scaffold(
@@ -82,10 +85,10 @@ class _HomePageState extends State<HomePage> {
                 Container(
                     child: Expanded(
                   child: ListView.builder(
-                    itemCount: habitData.length,
+                    itemCount: habitsData.length,
                     itemBuilder: (context, index) {
                       return HabitCard(
-                          habitName: Habits.habitsData[index].habitName);
+                          habitName: HabitDatabase.habitsData[index].habitName);
                     }, /*{
                   return HabitCard(
                     habitName: habitData[index].habitName,
