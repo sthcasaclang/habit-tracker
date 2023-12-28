@@ -1,26 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_tracker/habitsList.dart';
+import 'package:hive/hive.dart';
 import 'main.dart';
 import 'homepage.dart';
-import 'habitsList.dart';
+//import 'habitsList.dart';
+import 'database/habit_database.dart';
 
 class addHabitQuantitative extends StatefulWidget {
   addHabitQuantitative({super.key});
 
   @override
-  State<addHabitQuantitative> createState() => _addHabitQuantitative();
+  State<addHabitQuantitative> createState() => _addHabitQuantitativeState();
 }
 
-class _addHabitQuantitative extends State<addHabitQuantitative> {
-  final List<Habits> habitData = Habits.habitsData;
+class _addHabitQuantitativeState extends State<addHabitQuantitative> {
+  //final List<Habits> habitData = Habits.habitsData;
+  final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
   final _newHabitName = TextEditingController();
 
-  void saveNewHabit() {
+  /*void saveNewHabit() {
     setState(() {
-      habitData.add(Habits(habitType: 2, habitName: _newHabitName.text));
+      habitsData
+          .add(HabitDatabase(habitType: 1, habitName: _newHabitName.text));
     });
+  }*/
+
+  late final Box habitDatabaseBox;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get reference to an already opened box
+    habitDatabaseBox = Hive.box('habit_database');
+  }
+
+  void saveNewHabitInBox() async {
+    HabitDatabase newHabit = HabitDatabase(
+      habitName: _newHabitName.text,
+      habitType: 1,
+    );
+    habitDatabaseBox.add(newHabit);
+    print('Info added to box! $_newHabitName');
+  }
+
+  String? _fieldValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field can\'t be empty';
+    }
+    return null;
   }
 
   @override
@@ -50,13 +79,14 @@ class _addHabitQuantitative extends State<addHabitQuantitative> {
               color: Colors.black,
             ),
             onPressed: () {
-              saveNewHabit();
+              saveNewHabitInBox();
+              //saveNewHabit();
               /*Navigator.push(
                   context, MaterialPageRoute(builder: (context) => MyApp()));*/
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MyApp(),
+                    builder: (context) => const MyApp(),
                   ));
             },
           )

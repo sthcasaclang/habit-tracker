@@ -39,7 +39,7 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
   void saveNewHabitInBox() async {
     HabitDatabase newHabit = HabitDatabase(
       habitName: _newHabitName.text,
-      habitType: 1,
+      habitType: 0,
     );
     habitDatabaseBox.add(newHabit);
     print('Info added to box! $_newHabitName');
