@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //final List<Habits> habitData = Habits.habitsData;
 
-  var habitDatabaseBox;
+  late final Box habitDatabaseBox;
 
   @override
   void initState() {
@@ -32,15 +32,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     print("homepage habitData: ${habitDatabaseBox.values.toList()}");
 
-    for (var habit in HabitDatabase.habitsData) {
-      print('habitType: ${habit.habitType}, habitName: ${habit.habitName}');
-    }
-
-    print("Homepage - habitData: ${habitDatabaseBox.values.toList()}");
-
-    for (var habit in habitDatabaseBox.values) {
-      print('Habit Name: ${habit.habitName}');
-    }
     return Scaffold(
         backgroundColor: Colors.white,
         body: NotificationListener<OverscrollIndicatorNotification>(
@@ -105,7 +96,8 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, index) {
                       var habit =
                           habitDatabaseBox.getAt(index) as HabitDatabase;
-                      return HabitCard(habitName: habit.habitName);
+                      return HabitCard(
+                          habitName: habit.habitName, index: index);
                     },
                     /*itemCount: habitDatabaseBox.length,
                     itemBuilder: (context, index) {

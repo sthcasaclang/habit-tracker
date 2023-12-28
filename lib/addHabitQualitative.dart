@@ -27,7 +27,7 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
     });
   }*/
 
-  var habitDatabaseBox;
+  late final Box habitDatabaseBox;
 
   @override
   void initState() {

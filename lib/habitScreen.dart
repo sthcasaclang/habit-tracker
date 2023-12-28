@@ -9,8 +9,9 @@ import 'database/habit_database.dart';
 
 class HabitScreen extends StatefulWidget {
   String? habitName;
+  int index;
 
-  HabitScreen({super.key, required this.habitName});
+  HabitScreen({super.key, required this.habitName, required this.index});
 
   @override
   State<HabitScreen> createState() => _HabitScreenState();
@@ -21,13 +22,14 @@ class _HabitScreenState extends State<HabitScreen> {
 
   final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
-  var habitDatabaseBox;
+  late final Box habitDatabaseBox;
 
   @override
   void initState() {
     super.initState();
     // Get reference to an already opened box
     habitDatabaseBox = Hive.box('habit_database');
+    print("");
   }
 
   deleteHabit() {
@@ -41,8 +43,8 @@ class _HabitScreenState extends State<HabitScreen> {
     );
   }
 
-  void deleteHabitInBox(int index) async {
-    await habitDatabaseBox.deleteAt(index);
+  void deleteHabitInBox(int index) {
+    habitDatabaseBox.deleteAt(index);
 
     // After deleting, you might want to update your UI or navigate to a new screen
     Navigator.pushReplacement(
@@ -196,7 +198,7 @@ class _HabitScreenState extends State<HabitScreen> {
                                           child: TextButton(
                                             onPressed: () {
                                               Navigator.of(context).pop();
-                                              deleteHabit();
+                                              deleteHabitInBox(widget.index);
                                             },
                                             style: TextButton.styleFrom(
                                               primary:

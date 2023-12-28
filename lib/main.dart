@@ -16,6 +16,8 @@ void main() async {
 
   await Hive.openBox('habit_database');
 
+  //await Hive.box("habit_database").clear();
+
   runApp(const MyApp());
 }
 

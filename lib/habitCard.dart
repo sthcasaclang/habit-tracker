@@ -10,8 +10,9 @@ import 'database/habit_database.dart';
 
 class HabitCard extends StatefulWidget {
   final String? habitName;
+  final int index;
 
-  const HabitCard({super.key, required this.habitName});
+  const HabitCard({super.key, required this.habitName, required this.index});
 
   @override
   State<HabitCard> createState() => _HabitCardState();
@@ -92,8 +93,10 @@ class _HabitCardState extends State<HabitCard> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        HabitScreen(habitName: widget.habitName)),
+                    builder: (context) => HabitScreen(
+                          habitName: widget.habitName,
+                          index: widget.index,
+                        )),
               );
             },
             style: ElevatedButton.styleFrom(
