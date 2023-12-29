@@ -18,8 +18,14 @@ class HabitDatabaseAdapter extends TypeAdapter<HabitDatabase> {
     };
     if (fields.containsKey(0) && fields.containsKey(1)) {
       return HabitDatabase(
-        habitName: fields[0] as String?,
-        habitType: fields[1] as int?,
+        progressTracker: fields[0] as int?,
+        habitFinished: fields[1] as bool?,
+        habitName: fields[2] as String?,
+        habitType: fields[3] as int?,
+        habitQuestion: fields[4] as String?,
+        habitTarget: fields[5] as int?,
+        habitFrequency: fields[6] as String?,
+        habitUnit: fields[7] as String?,
       );
     } else {
       // Handle the case where expected fields are not present
@@ -29,14 +35,32 @@ class HabitDatabaseAdapter extends TypeAdapter<HabitDatabase> {
 
   @override
   void write(BinaryWriter writer, HabitDatabase obj) {
-    writer.writeByte(2); // Number of fields
+    writer.writeByte(7); // Number of fields
 
     // Write the fields to the binary writer
     writer.writeByte(0);
-    writer.write(obj.habitName);
+    writer.write(obj.progressTracker);
 
     writer.writeByte(1);
+    writer.write(obj.habitFinished);
+
+    writer.writeByte(2);
+    writer.write(obj.habitName);
+
+    writer.writeByte(3);
     writer.write(obj.habitType);
+
+    writer.writeByte(4);
+    writer.write(obj.habitQuestion);
+
+    writer.writeByte(5);
+    writer.write(obj.habitTarget);
+
+    writer.writeByte(6);
+    writer.write(obj.habitFrequency);
+
+    writer.writeByte(7);
+    writer.write(obj.habitUnit);
   }
 
   @override

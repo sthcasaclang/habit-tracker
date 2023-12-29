@@ -9,10 +9,27 @@ import 'main.dart';
 import 'database/habit_database.dart';
 
 class HabitCard extends StatefulWidget {
-  final String? habitName;
   final int index;
+  final int? progressTracker;
+  final bool? habitFinished;
+  final String? habitName;
+  final int? habitType;
+  final String? habitQuestion;
+  final int? habitTarget;
+  final String? habitFrequency;
+  final String? habitUnit;
 
-  const HabitCard({super.key, required this.habitName, required this.index});
+  const HabitCard(
+      {super.key,
+      required this.index,
+      required this.habitFinished,
+      required this.progressTracker,
+      required this.habitName,
+      required this.habitType,
+      required this.habitQuestion,
+      required this.habitTarget,
+      required this.habitFrequency,
+      required this.habitUnit});
 
   @override
   State<HabitCard> createState() => _HabitCardState();
@@ -24,6 +41,16 @@ class _HabitCardState extends State<HabitCard> {
   final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
   bool isButtonToggled = false;
+  bool canButtonBePressed = true;
+
+  late final Box habitDatabaseBox;
+
+  @override
+  void initState() {
+    super.initState();
+    // Get reference to an already opened box
+    habitDatabaseBox = Hive.box('habit_database');
+  }
 
   deleteHabit() async {
     print('removed!');
@@ -44,8 +71,109 @@ class _HabitCardState extends State<HabitCard> {
     );
   }
 
+  progressTracker(
+      int index,
+      bool? habitFinished,
+      int? progressTracker,
+      String? name,
+      int? type,
+      String? question,
+      int? target,
+      String? frequency,
+      String? unit) {
+    int updatingProgress = 0;
+
+    if (progressTracker == null) {
+      HabitDatabase changeProgressTrackerNullValue = HabitDatabase(
+          habitFinished: habitFinished,
+          progressTracker: 1,
+          habitName: name,
+          habitType: type,
+          habitQuestion: question,
+          habitTarget: target,
+          habitFrequency: frequency,
+          habitUnit: unit);
+      habitDatabaseBox.putAt(index, changeProgressTrackerNullValue);
+      print('progressTracker not null');
+      print("progressTracker = 1");
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) => const MyApp(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        ),
+      );
+    } else {
+      updatingProgress = progressTracker + 1;
+      HabitDatabase incrementProgress = HabitDatabase(
+          habitFinished: habitFinished,
+          progressTracker: updatingProgress,
+          habitName: name,
+          habitType: type,
+          habitQuestion: question,
+          habitTarget: target,
+          habitFrequency: frequency,
+          habitUnit: unit);
+      habitDatabaseBox.putAt(index, incrementProgress);
+      print('value incremented');
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) => const MyApp(),
+          transitionDuration: Duration.zero,
+          reverseTransitionDuration: Duration.zero,
+        ),
+      );
+    }
+  }
+
+  int finished = 0;
+
+  isItFinished(
+      int index,
+      bool? habitFinished,
+      int? progressTracker,
+      String? name,
+      int? type,
+      String? question,
+      int? target,
+      String? frequency,
+      String? unit) {
+    if (progressTracker == null) {
+      print("1st case: Not done yet");
+    } else if (progressTracker >= target!) {
+      HabitDatabase isFinished = HabitDatabase(
+          habitFinished: true,
+          progressTracker: progressTracker,
+          habitName: name,
+          habitType: type,
+          habitQuestion: question,
+          habitTarget: target,
+          habitFrequency: frequency,
+          habitUnit: unit);
+      habitDatabaseBox.putAt(index, isFinished);
+      print('Finished');
+      finished = finished + 1;
+      print(finished);
+    } else {
+      print("2nd case: Not done yet. count: $progressTracker");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    isItFinished(
+        widget.index,
+        widget.habitFinished,
+        widget.progressTracker,
+        widget.habitName,
+        widget.habitType,
+        widget.habitQuestion,
+        widget.habitTarget,
+        widget.habitFrequency,
+        widget.habitUnit);
+
     print('HabitCard - habitName: ${widget.habitName}');
     return Padding(
       padding: const EdgeInsets.only(left: 6, right: 6, bottom: 1),
@@ -94,13 +222,23 @@ class _HabitCardState extends State<HabitCard> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => HabitScreen(
-                          habitName: widget.habitName,
                           index: widget.index,
+                          progressTracker: widget.progressTracker,
+                          habitFinished: widget.habitFinished,
+                          habitName: widget.habitName,
+                          habitType: widget.habitType,
+                          habitQuestion: widget.habitQuestion,
+                          habitTarget: widget.habitTarget,
+                          habitFrequency: widget.habitFrequency,
+                          habitUnit: widget.habitUnit,
                         )),
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 255, 255, 255),
+              backgroundColor: finished == 0
+                  ? Colors
+                      .white // Set your default color when habit is not finished
+                  : Colors.green,
               shape: new RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(10.0),
               ),
@@ -116,7 +254,7 @@ class _HabitCardState extends State<HabitCard> {
                       textAlign: TextAlign.left,
                       style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                            color: Colors.black,
+                            color: finished == 0 ? Colors.black : Colors.white,
                             fontWeight: FontWeight.w600,
                             fontSize: 15),
                       ),
@@ -128,10 +266,37 @@ class _HabitCardState extends State<HabitCard> {
                   height: 50,
                   width: 50,
                   child: TextButton(
-                    onPressed: () {},
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.black,
+                    onPressed: canButtonBePressed
+                        ? () {
+                            print('canButtonBePressed: $canButtonBePressed');
+                            if (finished == 0) {
+                              progressTracker(
+                                  widget.index,
+                                  widget.habitFinished,
+                                  widget.progressTracker,
+                                  widget.habitName,
+                                  widget.habitType,
+                                  widget.habitQuestion,
+                                  widget.habitTarget,
+                                  widget.habitFrequency,
+                                  widget.habitUnit);
+                            }
+                          }
+                        : null,
+                    child: finished == 0
+                        ? Icon(
+                            Icons.add,
+                            color: Colors.black,
+                          )
+                        : Icon(
+                            Icons
+                                .check, // Use an appropriate icon for disabled state
+                            color: Colors.white,
+                          ),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      foregroundColor:
+                          finished == 0 ? Colors.grey : Colors.transparent,
                     ),
                   ),
                 )

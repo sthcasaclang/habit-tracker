@@ -6,12 +6,31 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'main.dart';
 import 'database/habit_database.dart';
+import 'habitScreenEditQualitative.dart';
+import 'habitScreenEditQuantitative.dart';
 
 class HabitScreen extends StatefulWidget {
-  String? habitName;
-  int index;
+  final int index;
+  final int? progressTracker;
+  final bool? habitFinished;
+  final String? habitName;
+  final int? habitType;
+  final String? habitQuestion;
+  final int? habitTarget;
+  final String? habitFrequency;
+  final String? habitUnit;
 
-  HabitScreen({super.key, required this.habitName, required this.index});
+  HabitScreen(
+      {super.key,
+      required this.index,
+      required this.habitFinished,
+      required this.progressTracker,
+      required this.habitName,
+      required this.habitType,
+      required this.habitQuestion,
+      required this.habitTarget,
+      required this.habitFrequency,
+      required this.habitUnit});
 
   @override
   State<HabitScreen> createState() => _HabitScreenState();
@@ -101,8 +120,49 @@ class _HabitScreenState extends State<HabitScreen> {
                                 double.infinity, // Make the button full width
                             child: TextButton.icon(
                               onPressed: () {
-                                // Handle button press
-                                // You can add your logic here
+                                if (widget.habitType == 1) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            HabitScreenEditQualitative(
+                                              index: widget.index,
+                                              progressTracker:
+                                                  widget.progressTracker,
+                                              habitFinished:
+                                                  widget.habitFinished,
+                                              habitName: widget.habitName,
+                                              habitType: widget.habitType,
+                                              habitQuestion:
+                                                  widget.habitQuestion,
+                                              habitTarget: widget.habitTarget,
+                                              habitFrequency:
+                                                  widget.habitFrequency,
+                                              habitUnit: widget.habitUnit,
+                                            )),
+                                  );
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            HabitScreenEditQuantitative(
+                                              index: widget.index,
+                                              progressTracker:
+                                                  widget.progressTracker,
+                                              habitFinished:
+                                                  widget.habitFinished,
+                                              habitName: widget.habitName,
+                                              habitType: widget.habitType,
+                                              habitQuestion:
+                                                  widget.habitQuestion,
+                                              habitTarget: widget.habitTarget,
+                                              habitFrequency:
+                                                  widget.habitFrequency,
+                                              habitUnit: widget.habitUnit,
+                                            )),
+                                  );
+                                }
                               },
                               icon: Icon(
                                 Icons

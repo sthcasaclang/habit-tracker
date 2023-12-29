@@ -14,6 +14,8 @@ void main() async {
 
   Hive.registerAdapter(HabitDatabaseAdapter());
 
+  //await Hive.deleteBoxFromDisk("habit_database");
+
   await Hive.openBox('habit_database');
 
   //await Hive.box("habit_database").clear();

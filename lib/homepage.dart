@@ -26,6 +26,8 @@ class _HomePageState extends State<HomePage> {
     habitDatabaseBox = Hive.box('habit_database');
   }
 
+  void checkStatus() {}
+
   final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 
   @override
@@ -56,8 +58,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Container(
-                  margin:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  margin: const EdgeInsets.only(left: 0, right: 0, bottom: 10),
                   height: 80,
                   width: 360,
                   child: ElevatedButton.icon(
@@ -97,7 +98,16 @@ class _HomePageState extends State<HomePage> {
                       var habit =
                           habitDatabaseBox.getAt(index) as HabitDatabase;
                       return HabitCard(
-                          habitName: habit.habitName, index: index);
+                        index: index,
+                        progressTracker: habit.progressTracker,
+                        habitFinished: habit.habitFinished,
+                        habitName: habit.habitName,
+                        habitType: habit.habitType,
+                        habitQuestion: habit.habitQuestion,
+                        habitTarget: habit.habitTarget,
+                        habitFrequency: habit.habitFrequency,
+                        habitUnit: habit.habitUnit,
+                      );
                     },
                     /*itemCount: habitDatabaseBox.length,
                     itemBuilder: (context, index) {
