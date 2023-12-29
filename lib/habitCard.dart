@@ -43,6 +43,8 @@ class _HabitCardState extends State<HabitCard> {
   bool isButtonToggled = false;
   bool canButtonBePressed = true;
 
+  int finished = 0;
+
   late final Box habitDatabaseBox;
 
   @override
@@ -128,8 +130,6 @@ class _HabitCardState extends State<HabitCard> {
     }
   }
 
-  int finished = 0;
-
   isItFinished(
       int index,
       bool? habitFinished,
@@ -153,12 +153,53 @@ class _HabitCardState extends State<HabitCard> {
           habitFrequency: frequency,
           habitUnit: unit);
       habitDatabaseBox.putAt(index, isFinished);
-      print('Finished');
       finished = finished + 1;
-      print(finished);
+      print('Finished +  $finished');
     } else {
       print("2nd case: Not done yet. count: $progressTracker");
     }
+  }
+
+  resetHabitProgress(
+      int index,
+      bool? habitFinished,
+      int? progressTracker,
+      String? name,
+      int? type,
+      String? question,
+      int? target,
+      String? frequency,
+      String? unit) async {
+    print("fuckyou");
+    if (habitFinished == true) {
+      // If habit was finished, decrement the finished count
+      finished = finished - 2;
+      print("habit resetted = $finished");
+    }
+
+    // Add your desired delay duration, for example, 2 seconds
+    await Future.delayed(const Duration(milliseconds: 250));
+
+    HabitDatabase resetHabitProgress = HabitDatabase(
+      habitFinished: false,
+      progressTracker: 0,
+      habitName: name,
+      habitType: type,
+      habitQuestion: question,
+      habitTarget: target,
+      habitFrequency: frequency,
+      habitUnit: unit,
+    );
+    habitDatabaseBox.putAt(index, resetHabitProgress);
+
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => MyApp(),
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+      ),
+    );
   }
 
   @override
@@ -182,20 +223,35 @@ class _HabitCardState extends State<HabitCard> {
           SlidableAction(
             padding: EdgeInsets.all(10),
             borderRadius: BorderRadius.circular(15),
-            onPressed: (context) {},
+            onPressed: (context) {
+              resetHabitProgress(
+                  widget.index,
+                  widget.habitFinished,
+                  widget.progressTracker,
+                  widget.habitName,
+                  widget.habitType,
+                  widget.habitQuestion,
+                  widget.habitTarget,
+                  widget.habitFrequency,
+                  widget.habitUnit);
+              setState(() {
+                // Toggle the button state
+                isButtonToggled = !isButtonToggled;
+              });
+            },
             backgroundColor: Colors.grey,
             foregroundColor: Colors.white,
             icon: Icons.restore,
             //label: 'Revert',
           ),
-          SlidableAction(
+          /*SlidableAction(
             borderRadius: BorderRadius.circular(15),
             onPressed: (context) {},
             backgroundColor: Colors.black,
             foregroundColor: Colors.white,
             icon: Icons.keyboard_double_arrow_right_rounded,
             //label: 'Skip',
-          ),
+          ),*/
         ]),
         /*startActionPane: ActionPane(motion: const ScrollMotion(), children: [
           SlidableAction(

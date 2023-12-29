@@ -90,7 +90,7 @@ class _HabitScreenEditQuantitativeState
         ),
         centerTitle: true,
         title: Text(
-          'Create New Habit',
+          widget.habitName ?? "Default Value",
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
               color: Colors.black,

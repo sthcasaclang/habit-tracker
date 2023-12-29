@@ -120,7 +120,7 @@ class _HabitScreenState extends State<HabitScreen> {
                                 double.infinity, // Make the button full width
                             child: TextButton.icon(
                               onPressed: () {
-                                if (widget.habitType == 1) {
+                                if (widget.habitType == 0) {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
