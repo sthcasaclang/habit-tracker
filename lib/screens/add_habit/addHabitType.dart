@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_tracker/addHabitQualitative.dart';
-import 'package:habit_tracker/addHabitQuantitative.dart';
+import 'addHabitQualitative.dart';
+import 'addHabitQuantitative.dart';
 
 class AddHabitType extends StatelessWidget {
   const AddHabitType({super.key});

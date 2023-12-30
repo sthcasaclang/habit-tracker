@@ -4,12 +4,12 @@ import 'package:hive/hive.dart';
 //import 'habitsList.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'main.dart';
-import 'database/habit_database.dart';
-import 'habitScreenEditQualitative.dart';
-import 'habitScreenEditQuantitative.dart';
+import '/main.dart';
+import '/database/habit_database.dart';
+import '/screens/edit_habit/habitScreenEditQualitative.dart';
+import '/screens/edit_habit/habitScreenEditQuantitative.dart';
 
-class HabitScreen extends StatefulWidget {
+class HabitInformation extends StatefulWidget {
   final int index;
   final int? progressTracker;
   final bool? habitFinished;
@@ -20,7 +20,7 @@ class HabitScreen extends StatefulWidget {
   final String? habitFrequency;
   final String? habitUnit;
 
-  HabitScreen(
+  HabitInformation(
       {super.key,
       required this.index,
       required this.habitFinished,
@@ -33,10 +33,10 @@ class HabitScreen extends StatefulWidget {
       required this.habitUnit});
 
   @override
-  State<HabitScreen> createState() => _HabitScreenState();
+  State<HabitInformation> createState() => _HabitInformation();
 }
 
-class _HabitScreenState extends State<HabitScreen> {
+class _HabitInformation extends State<HabitInformation> {
   //final List<Habits> habitData = Habits.habitsData;
 
   final List<HabitDatabase> habitsData = HabitDatabase.habitsData;

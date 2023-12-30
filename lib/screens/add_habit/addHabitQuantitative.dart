@@ -1,84 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:habit_tracker/database/habit_database.dart';
-import 'package:hive/hive.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'main.dart';
+import '/screens/habitsList.dart';
+import 'package:hive/hive.dart';
+import '/main.dart';
+import '/screens/homepage/homepage.dart';
+//import 'habitsList.dart';
+import '/database/habit_database.dart';
 
-class HabitScreenEditQuantitative extends StatefulWidget {
-  final int index;
-  final int? progressTracker;
-  final bool? habitFinished;
-  final String? habitName;
-  final int? habitType;
-  final String? habitQuestion;
-  final int? habitTarget;
-  final String? habitFrequency;
-  final String? habitUnit;
-
-  const HabitScreenEditQuantitative(
-      {super.key,
-      required this.index,
-      required this.habitFinished,
-      required this.progressTracker,
-      required this.habitName,
-      required this.habitType,
-      required this.habitQuestion,
-      required this.habitTarget,
-      required this.habitFrequency,
-      required this.habitUnit});
+class addHabitQuantitative extends StatefulWidget {
+  addHabitQuantitative({super.key});
 
   @override
-  State<HabitScreenEditQuantitative> createState() =>
-      _HabitScreenEditQuantitativeState();
+  State<addHabitQuantitative> createState() => _addHabitQuantitativeState();
 }
 
-class _HabitScreenEditQuantitativeState
-    extends State<HabitScreenEditQuantitative> {
-  late final Box habitDatabaseBox;
-  late final TextEditingController _habitName;
-  late final TextEditingController _question;
+class _addHabitQuantitativeState extends State<addHabitQuantitative> {
+  //final List<Habits> habitData = Habits.habitsData;
+  final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
+
+  final _habitName = TextEditingController();
+  final _question = TextEditingController();
   String? _frequency;
-  late final TextEditingController _target;
-  late final TextEditingController _unit;
+  final _target = TextEditingController();
+  final _unit = TextEditingController();
+
+  /*void saveNewHabit() {
+    setState(() {
+      habitsData
+          .add(HabitDatabase(habitType: 1, habitName: _newHabitName.text));
+    });
+  }*/
+
+  late final Box habitDatabaseBox;
 
   @override
   void initState() {
     super.initState();
     // Get reference to an already opened box
     habitDatabaseBox = Hive.box('habit_database');
-    _habitName =
-        TextEditingController(text: widget.habitName ?? "Default Value");
-    _question =
-        TextEditingController(text: widget.habitQuestion ?? "Default Question");
-    _target = TextEditingController(
-        text: widget.habitTarget?.toString() ?? "Default Value");
-    _unit = TextEditingController(text: widget.habitUnit ?? "Unit");
   }
 
-  void updateHabitInformationInBox(
-      int index,
-      bool? habitFinished,
-      int? progressTracker,
-      String? name,
-      int? type,
-      String? question,
-      int? target,
-      String? frequency,
-      String? unit) {
+  void saveNewHabitInBox() async {
     int targetValue = int.tryParse(_target.text) ?? 0;
 
-    HabitDatabase updateInformation = HabitDatabase(
-        habitFinished: habitFinished,
-        progressTracker: progressTracker,
-        habitName: _habitName.text,
-        habitType: type,
-        habitQuestion: _question.text,
-        habitTarget: targetValue,
-        habitFrequency: _frequency,
-        habitUnit: unit);
-    habitDatabaseBox.putAt(index, updateInformation);
-    print('Habit Information Updated');
+    HabitDatabase newHabit = HabitDatabase(
+      habitName: _habitName.text,
+      habitType: 1,
+      habitQuestion: _question.text,
+      habitTarget: targetValue,
+      habitFrequency: _frequency,
+      habitUnit: _unit.text,
+    );
+    habitDatabaseBox.add(newHabit);
+    print('Info added to box! $_habitName');
+  }
+
+  String? _fieldValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Field can\'t be empty';
+    }
+    return null;
   }
 
   @override
@@ -90,7 +71,7 @@ class _HabitScreenEditQuantitativeState
         ),
         centerTitle: true,
         title: Text(
-          widget.habitName ?? "Default Value",
+          'Create New Habit',
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
               color: Colors.black,
@@ -108,16 +89,7 @@ class _HabitScreenEditQuantitativeState
               color: Colors.black,
             ),
             onPressed: () {
-              updateHabitInformationInBox(
-                  widget.index,
-                  widget.habitFinished,
-                  widget.progressTracker,
-                  widget.habitName,
-                  widget.habitType,
-                  widget.habitQuestion,
-                  widget.habitTarget,
-                  widget.habitFrequency,
-                  widget.habitUnit);
+              saveNewHabitInBox();
               //saveNewHabit();
               /*Navigator.push(
                   context, MaterialPageRoute(builder: (context) => MyApp()));*/

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 //import 'habitsList.dart';
-import 'addHabitType.dart';
+import '/screens/add_habit/addHabitType.dart';
 import 'habitCard.dart';
-import 'addHabitType.dart';
-import 'database/habit_database.dart';
+import '/screens/add_habit/addHabitType.dart';
+import '/database/habit_database.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,8 +25,6 @@ class _HomePageState extends State<HomePage> {
     // Get reference to an already opened box
     habitDatabaseBox = Hive.box('habit_database');
   }
-
-  void checkStatus() {}
 
   final List<HabitDatabase> habitsData = HabitDatabase.habitsData;
 

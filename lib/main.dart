@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:habit_tracker/database/habit_database.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'homepage.dart';
+import '/screens/homepage/homepage.dart';
 import 'sidebar.dart';
 //import 'habitsList.dart';
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:habit_tracker/habitsList.dart';
+import '/screens/habitsList.dart';
 import 'package:hive/hive.dart';
-import 'main.dart';
-import 'homepage.dart';
+import '/main.dart';
+import '/screens/homepage/homepage.dart';
 //import 'habitsList.dart';
-import 'database/habit_database.dart';
+import '/database/habit_database.dart';
 
 class addHabitQualitative extends StatefulWidget {
   addHabitQualitative({super.key});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:habit_tracker/habitScreen.dart';
+import '/screens/habit_information/habitInformation.dart';
 import 'package:hive/hive.dart';
-import 'addHabitType.dart';
+import '/screens/add_habit/addHabitType.dart';
 //import 'habitsList.dart';
-import 'main.dart';
-import 'database/habit_database.dart';
+import '/main.dart';
+import '/database/habit_database.dart';
 
 class HabitCard extends StatefulWidget {
   final int index;
@@ -277,7 +277,7 @@ class _HabitCardState extends State<HabitCard> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => HabitScreen(
+                    builder: (context) => HabitInformation(
                           index: widget.index,
                           progressTracker: widget.progressTracker,
                           habitFinished: widget.habitFinished,
