@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //final List<Habits> habitData = Habits.habitsData;
-
+  HabitDatabase db = HabitDatabase();
   late final Box habitDatabaseBox;
 
   @override
@@ -24,6 +24,15 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // Get reference to an already opened box
     habitDatabaseBox = Hive.box('habit_database');
+
+    if (databaseBox.get("CURRENT_HABIT_LIST") == null) {
+      db.createNewDatabase();
+    }
+
+    // there already exists data, this is not the first time
+    else {
+      db.loadData();
+    }
   }
 
   final List<HabitDatabase> habitsData = HabitDatabase.habitsData;

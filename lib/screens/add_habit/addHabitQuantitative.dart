@@ -112,10 +112,10 @@ class _addHabitQuantitativeState extends State<addHabitQuantitative> {
               cursorColor: Colors.grey,
               decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 3),
+                    borderSide: BorderSide(color: Colors.grey, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 2),
+                    borderSide: BorderSide(color: Colors.grey, width: 1),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 labelText: 'Habit Name',
                 labelStyle: TextStyle(
@@ -131,10 +131,10 @@ class _addHabitQuantitativeState extends State<addHabitQuantitative> {
               cursorColor: Colors.grey,
               decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 3),
+                    borderSide: BorderSide(color: Colors.grey, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 2),
+                    borderSide: BorderSide(color: Colors.grey, width: 1),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 labelText: 'Question',
                 hintText: "e.g. How many hours did you sleep today?",
@@ -156,13 +156,11 @@ class _addHabitQuantitativeState extends State<addHabitQuantitative> {
                     cursorColor: Colors.grey,
                     decoration: const InputDecoration(
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 207, 207, 207),
-                            width: 3),
+                        borderSide: BorderSide(color: Colors.grey, width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 2),
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       labelText: 'Target',
@@ -195,11 +193,11 @@ class _addHabitQuantitativeState extends State<addHabitQuantitative> {
                       contentPadding: EdgeInsets.only(
                           left: 13, right: 7, bottom: 18, top: 18),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 3),
+                        borderSide: BorderSide(color: Colors.grey, width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey, width: 2),
+                        borderSide: BorderSide(color: Colors.grey, width: 1),
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
                       hintText: "Frequency",
@@ -222,10 +220,10 @@ class _addHabitQuantitativeState extends State<addHabitQuantitative> {
               cursorColor: Colors.grey,
               decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 3),
+                    borderSide: BorderSide(color: Colors.grey, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 2),
+                    borderSide: BorderSide(color: Colors.grey, width: 1),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 labelText: 'Unit',
                 hintText: "e.g. hours",

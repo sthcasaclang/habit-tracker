@@ -1,3 +1,4 @@
+import 'package:habit_tracker/datetime/date_time.dart';
 import 'package:hive/hive.dart';
 part 'habit_database.g.dart';
 
@@ -8,45 +9,50 @@ class HabitDatabase {
   static List<HabitDatabase> habitsData = [];
 
   @HiveType(typeId: 0)
-  final int? progressTracker;
+  int? progressTracker;
 
   @HiveType(typeId: 1)
-  final bool? habitFinished;
+  bool? habitFinished;
 
   @HiveType(typeId: 2)
-  final String? habitName;
+  String? habitName;
 
   @HiveType(typeId: 3)
-  final int? habitType;
+  int? habitType;
 
   @HiveType(typeId: 4)
-  final String? habitQuestion;
+  String? habitQuestion;
 
   @HiveType(typeId: 5)
-  final int? habitTarget;
+  int? habitTarget;
 
   @HiveType(typeId: 6)
-  final String? habitFrequency;
+  String? habitFrequency;
 
   @HiveType(typeId: 7)
-  final String? habitUnit;
+  String? habitUnit;
 
-  HabitDatabase(
-      {this.habitFinished,
-      this.progressTracker,
-      this.habitName,
-      this.habitType,
-      this.habitQuestion,
-      this.habitTarget,
-      this.habitFrequency,
-      this.habitUnit});
+  @HiveType(typeId: 8)
+  String? startDate;
+
+  HabitDatabase({
+    this.habitFinished,
+    this.progressTracker,
+    this.habitName,
+    this.habitType,
+    this.habitQuestion,
+    this.habitTarget,
+    this.habitFrequency,
+    this.habitUnit,
+    this.startDate,
+  });
 
   @override
   String toString() {
     return 'HabitDatabase(progressTracker: $progressTracker, habitFinished: $habitFinished, habitName: $habitName, habitType: $habitType, habitQuestion: $habitQuestion, habitTarget: $habitTarget, habitFrequency: $habitFrequency, habitUnit: $habitUnit)';
   }
 
-  createNewDatabase() {
+  createNewDatabase() async {
     habitsData = [
       HabitDatabase(
           progressTracker: 0,
@@ -57,5 +63,27 @@ class HabitDatabase {
           habitFrequency: "Sample Frequency",
           habitUnit: "Sample Unit")
     ];
+
+    //databaseBox.put("habitList", "CURRENT_HABIT_LIST");
+
+    //databaseBox.put("HABIT_LIST", habitsData);
+
+    await databaseBox.put(startDate, todaysDateFormatted());
+  }
+
+  void loadData() {
+    // if it's a new day, get habit list from database
+    if (databaseBox.get(todaysDateFormatted()) == null) {
+      habitsData = databaseBox.get("CURRENT_HABIT_LIST");
+      // set all habit completed to false since it's a new day
+      for (int i = 0; i < habitsData.length; i++) {
+        habitsData[i].progressTracker = 0;
+        habitsData[i].habitFinished = false;
+      }
+    }
+    // if it's not a new day, load todays list
+    else {
+      habitsData = databaseBox.get(todaysDateFormatted());
+    }
   }
 }

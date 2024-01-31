@@ -44,6 +44,7 @@ dependencies:
   hive_flutter: ^1.1.0
   hive_generator: ^1.1.2
   build_runner: ^2.1.8
+  flutter_heatmap_calendar: ^1.0.5
   
 
 dev_dependencies:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 //import 'habitsList.dart';
@@ -440,7 +441,36 @@ class _HabitInformation extends State<HabitInformation> {
                   overScroll.disallowIndicator();
                   return true;
                 },
-                child: Card(),
+                child: Column(
+                  children: [
+                    Container(
+                      color: Colors.amber,
+                      margin: EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        widget.habitQuestion ?? "Default Value",
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const HeatMapCalendar(
+                      colorsets: const {
+                        1: Colors.red,
+                        3: Colors.orange,
+                        5: Colors.yellow,
+                        7: Colors.green,
+                        9: Colors.blue,
+                        11: Colors.indigo,
+                        13: Colors.purple,
+                      },
+                    ),
+                  ],
+                ),
               ),
             )));
   }

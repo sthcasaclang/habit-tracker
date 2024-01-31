@@ -26,6 +26,7 @@ class HabitDatabaseAdapter extends TypeAdapter<HabitDatabase> {
         habitTarget: fields[5] as int?,
         habitFrequency: fields[6] as String?,
         habitUnit: fields[7] as String?,
+        startDate: fields[8] as String?,
       );
     } else {
       // Handle the case where expected fields are not present
@@ -35,7 +36,7 @@ class HabitDatabaseAdapter extends TypeAdapter<HabitDatabase> {
 
   @override
   void write(BinaryWriter writer, HabitDatabase obj) {
-    writer.writeByte(7); // Number of fields
+    writer.writeByte(10); // Number of fields
 
     // Write the fields to the binary writer
     writer.writeByte(0);
@@ -61,6 +62,9 @@ class HabitDatabaseAdapter extends TypeAdapter<HabitDatabase> {
 
     writer.writeByte(7);
     writer.write(obj.habitUnit);
+
+    writer.writeByte(8);
+    writer.write(obj.startDate);
   }
 
   @override

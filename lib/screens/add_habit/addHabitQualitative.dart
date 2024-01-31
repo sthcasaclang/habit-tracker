@@ -107,10 +107,10 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
               cursorColor: Colors.grey,
               decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 3),
+                    borderSide: BorderSide(color: Colors.grey, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 2),
+                    borderSide: BorderSide(color: Colors.grey, width: 1),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 labelText: 'Habit Name',
                 labelStyle: TextStyle(
@@ -126,10 +126,10 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
               cursorColor: Colors.grey,
               decoration: const InputDecoration(
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 3),
+                    borderSide: BorderSide(color: Colors.grey, width: 2),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 2),
+                    borderSide: BorderSide(color: Colors.grey, width: 1),
                     borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 labelText: 'Question',
                 labelStyle: TextStyle(
@@ -157,11 +157,11 @@ class _addHabitQualitativeState extends State<addHabitQualitative> {
                 contentPadding:
                     EdgeInsets.only(left: 13, right: 10, bottom: 18, top: 18),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 3),
+                  borderSide: BorderSide(color: Colors.grey, width: 2),
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey, width: 2),
+                  borderSide: BorderSide(color: Colors.grey, width: 1),
                   borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 ),
                 hintText: "Frequency",
